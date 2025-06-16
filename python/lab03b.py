@@ -61,12 +61,8 @@ for alg in ['pd_t', 'pf_t']:
     x = df_promedios["n"].values
     y = df_promedios[alg].values
 
-    # Ajuste polinómico de grado 2
-    coef = np.polyfit(x, y, 2)
-    eq = f"{coef[0]:.2e}x² + {coef[1]:.2e}x + {coef[2]:.2e}"
-
-    # Solo graficar los puntos originales, con la ecuación en la leyenda
-    plt.plot(x, y, 'o-', label=f"{alg} (ajuste: {eq})")
+    # Solo graficar los puntos originales
+    plt.plot(x, y, 'o-', label=f"{alg}")
 
 plt.xlabel("n")
 plt.ylabel("tiempo")
