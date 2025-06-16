@@ -73,15 +73,14 @@ fn control(orden_n: usize, m: usize) {
         let coeficientes = generar_coeficientes(orden_n);
 
         let inicio_directa = Instant::now();
-        let _resultado_directo = evaluar_polinomio(&coeficientes, orden_n, variable_x);
+        evaluar_polinomio(&coeficientes, orden_n, variable_x);
         let duracion_directa = inicio_directa.elapsed();
 
         let inicio_factorizado = Instant::now();
-        let _resultado_factorizado =
-            evaluar_polinomio_factorizado(&coeficientes, orden_n, variable_x);
+        evaluar_polinomio_factorizado(&coeficientes, orden_n, variable_x);
         let duracion_factorizado = inicio_factorizado.elapsed();
 
-        datos.push(Fila{
+        datos.push(Fila {
             ejec: i,
             pd_t: duracion_directa.as_secs_f64(),
             pf_t: duracion_factorizado.as_secs_f64(),
@@ -100,8 +99,15 @@ fn main() {
         eprintln!("Uso: $ ./{} <orden_n> <repeticiones>", args[0]);
         return;
     }
-    let orden_n: usize = args[1].parse().expect("Numero invalido para n");
+    let _orden_n: usize = args[1].parse().expect("Numero invalido para n");
     let m: usize = args[2].parse().expect("Numero invalido para x");
 
-   control(orden_n, m);
+    let n_vec: Vec<usize> = vec![
+        10, 50, 100, 500, 1_000, 5_000, 10_000, 20_000, 30_000, 40_000, 50_000, 60_000, 70_000,
+        80_000, 90_000, 100_000, 200_000, 300_000, 400_000, 500_000, 600_000, 700_000, 800_000, 900_000, 1_000_000,
+    ];
+
+    for &n in n_vec.iter() {
+        control(n, m);
+    }
 }
